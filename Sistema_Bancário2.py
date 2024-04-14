@@ -2,7 +2,7 @@ import textwrap
 
 
 def menu():
-    menu = """
+    opcoes = """
         \n
         ================ MENU ================
         [d]\tDepositar
@@ -14,7 +14,8 @@ def menu():
         [q]\tSair
         =>
     """
-    return (textwrap.dedent(menu))
+    return textwrap.dedent(opcoes)
+
 
 def depositar(saldo, valor, extrato):
     if valor > 0:
@@ -27,7 +28,8 @@ def depositar(saldo, valor, extrato):
 
     return saldo, extrato
 
-def sacar(*,saldo, valor, extrato, limite, numero_saque, limite_saques):
+
+def sacar(*, saldo, valor, extrato, limite, numero_saque, limite_saques):
     excedeu_saldo = valor > saldo
     excedeu_limite = valor > limite
     excedeu_saque = numero_saque >= limite_saques
@@ -52,11 +54,13 @@ def sacar(*,saldo, valor, extrato, limite, numero_saque, limite_saques):
 
     return saldo, extrato, numero_saque
 
+
 def exibir_extrato(saldo, *, extrato):
     print("\n==================== EXTRATO ====================")
     print("Não foram realizada movimentações" if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("========================================")
+
 
 def criar_usuario(usuarios):
     cpf = input("Informe o CPF do usuário (somente números): ")
@@ -70,23 +74,26 @@ def criar_usuario(usuarios):
     data_nascimento = input("Informe a data de nascimento (dd-mm-aaaa): ")
     endereco = input("Informe o endereço (logradouro, nº - bairro - cidade/uf): ")
 
-    usuarios.append({"nome":nome, "data_nascimento":data_nascimento, "cpf":cpf, "endereco":endereco})
+    usuarios.append({"nome": nome, "data_nascimento": data_nascimento, "cpf": cpf, "endereco": endereco})
 
     print("===Usuário criado com sucesso!===")
 
+
 def filtrar_usuario(cpf, usuarios):
-    usuarios_filtrados =[usuario for usuario in usuarios if usuario["cpf"] == cpf]
+    usuarios_filtrados = [usuario for usuario in usuarios if usuario["cpf"] == cpf]
     return usuarios_filtrados[0] if usuarios_filtrados else None
+
 
 def criar_conta(agencia, numero_conta, usuarios):
     cpf = input("Informe o CPF do usuário (somente números): ")
     usuario = filtrar_usuario(cpf, usuarios)
 
-    if  usuario:
+    if usuario:
         print("Conta criado com sucesso!")
-        return {"agencia":agencia, "numero_conta":numero_conta, "usuario":usuario}
+        return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
 
     print("\n!!!Usuário não encontrado.!!!")
+
 
 def listar_contas(contas):
     for conta in contas:
@@ -97,6 +104,7 @@ def listar_contas(contas):
         """
         print("=" * 100)
         print(textwrap.dedent(linha))
+
 
 def main():
     LIMITE_SAQUE = 3
@@ -150,5 +158,6 @@ def main():
 
         else:
             print("Operação inválida, por favor selecione novamente a operação desejada")
+
 
 main()
