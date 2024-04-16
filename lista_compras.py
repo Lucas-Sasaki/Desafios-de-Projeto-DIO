@@ -1,5 +1,6 @@
 import textwrap
 
+
 def menu():
     opcoes = """
     \n
@@ -35,7 +36,6 @@ def remover_item(lista_compra):
 
     else:
         print(f"!!!!!{item} não está presente em sua lista de compras.!!!!!")
-
 
 
 def listar_produtos(lista_compra):
