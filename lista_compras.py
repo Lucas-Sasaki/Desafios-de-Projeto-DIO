@@ -39,8 +39,9 @@ def remover_item(lista_compra):
 
 
 def listar_produtos(lista_compra):
+    print("================= LISTA DE COMPRAS =================")
     for i, produto in enumerate(lista_compra, start=1):
-        linha = f"""\
+        linha = f"""
                 {i} - {produto}
                 """
         print(textwrap.dedent(linha))
